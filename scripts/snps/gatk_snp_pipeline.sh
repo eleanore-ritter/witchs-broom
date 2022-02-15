@@ -77,12 +77,7 @@ VariantFiltration \
 
 rm -r tmp
 
-# Annotate SNPs with snpEff
-## First, build database if needed
-cd /mnt/home/rittere5/programs/snpeff/snpEff
-java -Xmx15G -jar snpEff.jar build -gff3 -v vvinifera12.2
-## Now annotate SNPs
-java -Xmx15G -jar /mnt/home/rittere5/programs/snpeff/snpEff/snpEff.jar -v vvinifera12.2 grape.filtered.vcf > grape.annotated.vcf
+# Done! Should have an output file containing SNPs.
 
-#Done! Should have an output file containing SNPs.
+# Use annovar.sh to annotate SNPs after converting output with convert2annovar.pl
 ...

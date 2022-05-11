@@ -11,10 +11,12 @@ Two independent cases of WB were sequenced, alongside respective wildtype (WT) s
 
 #### Within scripts, there are the following subdirectories:
 * **arabidopsis-orthologs:** scripts for getting Arabidopsis orthologs to candidate *V. vinifera* genes
+* **assembly:** scripts for assembling genomes
 * **lift-annotations:** scripts for lifting old grape genome annotations to new grape assembly
 * **mapping:** scripts for preparing raw reads for mapping, mapping, and preparing mapped reads for downstream analysis
 * **merlotref-to-pn:** scripts for matching annotations from Merlot reference genome to annotations from *V. vinifera* PN reference genome
 * **misc:** miscellaneous scripts
+* **ont-svs:** scripts for calling svs using ont reads
 * **py-scripts:** python scripts that may be useful for bioinformatics
 * **snps:** scripts for SNP-calling pipeline (the GATK pipeline)
 * **svs:** scripts for SV-calling (utilizing smoove, DELLY, and intansv)

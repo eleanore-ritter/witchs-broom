@@ -2,14 +2,14 @@
 
 #### **Project goal:** To uncover the potential genetic basis for the Witch's Broom (WB) budsport in grapevine using whole genome sequencing data.
 
-Two independent cases of WB were sequenced, alongside respective wildtype (WT) samples. One case was in the Merlot variety, and the WB and WT tissue can from the same plant. The second case was in the Dakapo variety, and the WB and WT samples came from different plants.
+Two independent cases of WB were sequenced, alongside respective wildtype (WT) samples. One case was in the Merlot variety, and the WB and WT tissue were from the same plant. The second case was in the Dakapo variety, and the WB and WT samples came from different plants. We used both short and long read sequencing approaches to call putative casual variants.
 
-#### The repository is structured with the following subdirectories as such:
+#### The repository is structured with the following subdirectories as such (more subdirectories to be added closer to publication):
 
-* **bin:** contains compiled files, such as installed programs
 * **scripts:** contains the scripts for the project
 
 #### Within scripts, there are the following subdirectories:
+
 * **arabidopsis-orthologs:** scripts for getting Arabidopsis orthologs to candidate *V. vinifera* genes
 * **assembly:** scripts for assembling genomes
 * **lift-annotations:** scripts for lifting old grape genome annotations to new grape assembly
@@ -19,5 +19,3 @@ Two independent cases of WB were sequenced, alongside respective wildtype (WT) s
 * **ont-svs:** scripts for calling svs using ont reads
 * **py-scripts:** python scripts that may be useful for bioinformatics
 * **snps:** scripts for SNP-calling pipeline (the GATK pipeline)
-* **svs:** scripts for SV-calling (utilizing smoove, DELLY, and intansv)
-* **teis:** scripts for TE annotation (EDTA) and TEI-calling (Jitterbug)

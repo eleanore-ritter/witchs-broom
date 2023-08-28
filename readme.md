@@ -2,7 +2,7 @@
 
 **This Github repository includes scripts used in the paper titled "From buds to shoots: Insights into grapevine development from the WB budsport".** 
 
-This project investigated the potential genetic basis for the Witch's Broom (WB) bud sport in grapevine. Two independent cases of WB were sequenced using both Illumina and Oxford Nanopore sequencing, alongside respective wild-type (WT) samples. We called both SNPs and structural variants (SVs) using the mapped reads from the sequencing data generated. The variants were annotated using Genoscope 12X grapevine genome annotations (Jaillon et al., 2007) lifted to the 12X.v2 grapevine genome assembly (Canaguier et al., 2017). *Arabidopsis* orthologs to grapevine genes were used to investigate gene function of genes impacted by high impact variants unique to the WB samples.
+This project investigated the potential genetic basis for the Witch's Broom (WB) bud sport in grapevine. Two independent cases of WB - in the Merlot and Dakapo varieties - were sequenced using both Illumina and Oxford Nanopore sequencing, alongside respective wild-type (WT) samples. We called both SNPs and structural variants (SVs) using the mapped reads from the sequencing data generated. The variants were annotated using Genoscope 12X grapevine genome annotations (Jaillon et al., 2007) lifted to the 12X.v2 grapevine genome assembly (Canaguier et al., 2017). *Arabidopsis* orthologs to grapevine genes were used to investigate gene function of genes impacted by high impact variants unique to the WB samples.
 
 #### Within scripts, there are the following subdirectories:
 

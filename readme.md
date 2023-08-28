@@ -5,9 +5,12 @@
 #### Within scripts, there are the following subdirectories:
 
 * **arabidopsis-orthologs:** scripts for getting *Arabidopsis* orthologs to candidate grapevine genes
+* **data-visualization-and-stats:** scripts for making plots in figures 2-4 and supplementary figures 1-3, and 7
 * **lift-annotations:** scripts for lifting old grapevine genome annotations to the new grapevine assembly
 * **misc:** miscellaneous scripts
 * **ont-mapping-and-svs:** scripts for mapping ONT reads, calling SVs using ONT data, and all downstream processes used for analyzing the SVs, such as filtering
 * **py-scripts:** python scripts that may be useful for bioinformatics
 * **short-read-mapping:** scripts for preparing raw short reads for mapping, mapping the reads, and preparing mapped reads for downstream analysis
 * **snps:** scripts for SNP-calling pipeline (the GATK pipeline) and downstream processes used for analyzing the SNPs
+
+*Note: the script for the R/BiomaRt annotation of Arabidopsis orthologs for genes impacted by high impact SNPs is in scripts/misc/TableS3.R*

@@ -66,7 +66,7 @@ VariantFiltration \
 --variant grape_genotyped.vcf \
 --filter-expression "MQ<40.00" \
 --filter-name MQ40 \
---filter-expression "FS<60.0" \
+--filter-expression "FS>60.0" \
 --filter-name FS60 \
 --filter-expression "QD<2.0" \
 --filter-name QD2 \

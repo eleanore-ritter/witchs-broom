@@ -22,18 +22,28 @@ cd ${PBS_O_WORKDIR}
 export PATH="${conda}/envs/svs/bin:${PATH}"
 export LD_LIBRARY_PATH="${conda}/envs/svs/lib:${LD_LIBRARY_PATH}"
 
-#Variables should not need to be changed
-sample=$(pwd | sed s/^.*\\///)
-path1="all_svs"
 
 #Change directory
-cd ${path1}
+cd survivor-crops
 
 #Merge SVs called from ont reads
-echo "All inputs are unfiltered. Check survivor input files if unsure."
+echo "All inputs should already be filtered by user. Check survivor input files if unsure."
 
-echo "Making all-svs file by merging all svs from sniffles, nanosv, and pbsv"
+echo "Making mwb-all-joint-merged-V1.vcf file by merging sniffles and pbsv - SVs must match for both programs"
 
-SURVIVOR merge survivor_ont ${maxdis} 1 1 1 0 30 ${sample}-all-svs.vcf
+SURVIVOR merge survivor-mwb-all ${maxdis} 2 1 1 0 30 mwb-all-joint-merged-V1.vcf
+
+echo "Making mwt-all-joint-merged-V1.vcf file by merging sniffles and pbsv - SVs must match for both programs"
+
+SURVIVOR merge survivor-mwt-all ${maxdis} 2 1 1 0 30 mwt-all-joint-merged-V1.vcf
+
+echo "Making mwb-unq-geno-joint-merged-V1.vcf file by merging sniffles and pbsv - SVs must match for both programs"
+
+SURVIVOR merge survivor-mwb-unq-geno ${maxdis} 2 1 1 0 30 mwb-unq-geno-joint-merged-V1.vcf
+
+echo "Making mwt-unq-geno-joint-merged-V1.vcf file by merging sniffles and pbsv - SVs must match for both programs"
+
+SURVIVOR merge survivor-mwt-unq-geno ${maxdis} 2 1 1 0 30 mwt-unq-geno-joint-merged-V1.vcf
 
 echo "Done"
+

@@ -2,6 +2,7 @@ setwd("C:/Users/rittere5/OneDrive - Michigan State University/Witchs_Broom_Proje
 #setwd("C:/Users/elean/OneDrive - Michigan State University/Witchs_Broom_Project/final-snps-2023/")
 
 library(biomaRt)
+library(dplyr)
 
 ############# MAKING DAKAPO WB SNP CANDIDATE LIST #############
 # Load data
@@ -190,6 +191,27 @@ data4$WT_Genotype <- paste(data4$DWT_Sniffles_Genotype, data4$dakapowt, sep = ";
 data5DSV <- data4[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "V2.y", "tair_symbol")]
 colnames(data5DSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")
 
+# Remove genotypes that match between callers
+
+test1<-cbind(data5DSV,do.call('rbind', strsplit(as.character(data5DSV$WB_Genotype), ';', fixed=TRUE)))
+colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv")
+
+test2<-cbind(test1,do.call('rbind', strsplit(as.character(test1$WT_Genotype), ';', fixed=TRUE)))
+colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv", "WT.sniffles", "WT.pbsv")
+
+test3 <- test2[test2$WB.sniffles != test2$WT.sniffles,]
+test4 <- test3[test3$WB.pbsv != test3$WT.pbsv,]
+
+# Remove columns where no genotype was called
+
+test5 <- test4[!grepl("\\./\\.", test4$WT_Genotype),] 
+
+test6 <- test5 %>% distinct()
+
+# Final dataframe
+
+data6DSV <- test6[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")]
+
 # Clean up environment
 
 ############# MAKING MERLOT WB SV CANDIDATE LIST #############
@@ -265,16 +287,37 @@ data4$WT_Genotype <- paste(data4$MWT_Sniffles_Genotype, data4$merlotwt, sep = ";
 data5MSV <- data4[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "V2.y", "tair_symbol")]
 colnames(data5MSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")
 
+# Remove genotypes that match between callers
+
+test1<-cbind(data5MSV,do.call('rbind', strsplit(as.character(data5MSV$WB_Genotype), ';', fixed=TRUE)))
+colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv")
+
+test2<-cbind(test1,do.call('rbind', strsplit(as.character(test1$WT_Genotype), ';', fixed=TRUE)))
+colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv", "WT.sniffles", "WT.pbsv")
+
+test3 <- test2[test2$WB.sniffles != test2$WT.sniffles,]
+test4 <- test3[test3$WB.pbsv != test3$WT.pbsv,]
+
+# Remove columns where no genotype was called
+
+test5 <- test4[!grepl("\\./\\.", test4$WT_Genotype),] 
+
+test6 <- test5 %>% distinct()
+
+# Final dataframe
+
+data6MSV <- test6[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")]
+
 # Clean up environment
 
 ############################# ADD ALL DATAFRAMES TOGETHER #############################
-temp1 <- rbind(data6D, data5DSV)
-temp2 <- rbind(data6M, data5MSV)
+temp1 <- rbind(data6D, data6DSV)
+temp2 <- rbind(data6M, data6MSV)
 TableS3 <- rbind(temp1, temp2)
 TableS3.V2 <- unique(TableS3)
-write.csv(TableS3.V2, "TableS3_230715.csv", row.names = FALSE)
+write.csv(TableS3.V2, "TableS3_final.csv", row.names = FALSE)
 
-temp3 <- data5DSV$Grape_Gene_Impacted
+temp3 <- data6DSV$Grape_Gene_Impacted
 temp4 <- data6D$Grape_Gene_Impacted
 temp5 <- c(temp3, temp4)
 dakapo.genes <- as.data.frame(unique(temp5))
@@ -282,7 +325,7 @@ colnames(dakapo.genes) <- c("gene")
 
 rm(temp3, temp4, temp5)
 
-temp3 <- data5MSV$Grape_Gene_Impacted
+temp3 <- data6MSV$Grape_Gene_Impacted
 temp4 <- data6M$Grape_Gene_Impacted
 temp5 <- c(temp3, temp4)
 merlot.genes <- as.data.frame(unique(temp5))

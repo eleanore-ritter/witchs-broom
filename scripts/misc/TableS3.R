@@ -120,7 +120,8 @@ colnames(data6M) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genot
 
 ############# MAKING DAKAPO WB SV CANDIDATE LIST #############
 # Load data
-data <- read.csv("Dakapo-joint-merged-V3.annotated.txt", sep = '\t', header = FALSE)
+#data <- read.csv("Dakapo-joint-merged-V3.annotated.txt", sep = '\t', header = FALSE)
+data <- read.csv("dwb-unq-geno-joint-merged-V1.annotated.txt", sep = '\t', header = FALSE)
 data$Position <- paste(data$V1, data$V2, sep = ":")
 data$Variety <- c("Dakapo")
 
@@ -182,11 +183,12 @@ vcf_names<-unlist(strsplit(tmp_vcf[length(tmp_vcf)],"\t"))
 names(tmp_vcf_data)<-vcf_names
 pbsv <- tmp_vcf_data
 rm(tmp_vcf, tmp_vcf_data)
-tmp_data1 <- merge(dwt2, pbsv, by.x = "V2", by.y = "ID")
+dwt3 <- as.data.frame(lapply(dwt2, function(x) as.character(gsub("_", ":", x))))
+tmp_data1 <- merge(dwt3, pbsv, by.x = "V2", by.y = "ID")
 data4 <- merge(data3, tmp_data1, by.x="Position", by.y = "V1")
 
 data4$dakapowt <- substr(data4$dakapowt, 1, 3)
-data4$WT_Genotype <- paste(data4$DWT_Sniffles_Genotype, data4$dakapowt, sep = ";")
+data4$WT_Genotype <- paste(data4$dakapowt, data4$DWT_Sniffles_Genotype, sep = ";")
 
 data5DSV <- data4[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "V2.y", "tair_symbol")]
 colnames(data5DSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")
@@ -216,7 +218,8 @@ data6DSV <- test6[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Geno
 
 ############# MAKING MERLOT WB SV CANDIDATE LIST #############
 # Load data
-data <- read.csv("Merlot-joint-merged-V3.annotated.txt", sep = '\t', header = FALSE)
+#data <- read.csv("Merlot-joint-merged-V3.annotated.txt", sep = '\t', header = FALSE)
+data <- read.csv("mwb-unq-geno-joint-merged-V1.annotated.txt", sep = '\t', header = FALSE)
 data$Position <- paste(data$V1, data$V2, sep = ":")
 data$Variety <- c("Merlot")
 
@@ -278,11 +281,12 @@ vcf_names<-unlist(strsplit(tmp_vcf[length(tmp_vcf)],"\t"))
 names(tmp_vcf_data)<-vcf_names
 pbsv <- tmp_vcf_data
 rm(tmp_vcf, tmp_vcf_data)
-tmp_data1 <- merge(mwt2, pbsv, by.x = "V2", by.y = "ID")
+mwt3 <- as.data.frame(lapply(mwt2, function(x) as.character(gsub("_", ":", x))))
+tmp_data1 <- merge(mwt3, pbsv, by.x = "V2", by.y = "ID")
 data4 <- merge(data3, tmp_data1, by.x="Position", by.y = "V1")
 
 data4$merlotwt <- substr(data4$merlotwt, 1, 3)
-data4$WT_Genotype <- paste(data4$MWT_Sniffles_Genotype, data4$merlotwt, sep = ";")
+data4$WT_Genotype <- paste(data4$merlotwt,data4$MWT_Sniffles_Genotype, sep = ";")
 
 data5MSV <- data4[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "V2.y", "tair_symbol")]
 colnames(data5MSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")

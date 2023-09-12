@@ -197,10 +197,12 @@ colnames(data5DSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Gen
 # This location had two variants called at one position, and only the variant shared between callers will be kept
 
 test1<-cbind(data5DSV,do.call('rbind', strsplit(as.character(data5DSV$WB_Genotype), ';', fixed=TRUE)))
-colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv")
+colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.pbsv", "WB.sniffles")
 
 test2<-cbind(test1,do.call('rbind', strsplit(as.character(test1$WT_Genotype), ';', fixed=TRUE)))
-colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv", "WT.sniffles", "WT.pbsv")
+colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype",
+                     "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", 
+                     "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.pbsv", "WB.sniffles","WT.pbsv", "WT.sniffles")
 
 test3 <- test2[test2$WB.sniffles != test2$WT.sniffles,]
 test4 <- test3[test3$WB.pbsv != test3$WT.pbsv,]
@@ -295,10 +297,10 @@ colnames(data5MSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Gen
 # Remove genotypes that match between callers
 
 test1<-cbind(data5MSV,do.call('rbind', strsplit(as.character(data5MSV$WB_Genotype), ';', fixed=TRUE)))
-colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv")
+colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.pbsv", "WB.sniffles")
 
 test2<-cbind(test1,do.call('rbind', strsplit(as.character(test1$WT_Genotype), ';', fixed=TRUE)))
-colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv", "WT.sniffles", "WT.pbsv")
+colnames(test2) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.pbsv", "WB.sniffles", "WT.pbsv", "WT.sniffles")
 
 test3 <- test2[test2$WB.sniffles != test2$WT.sniffles,]
 test4 <- test3[test3$WB.pbsv != test3$WT.pbsv,]

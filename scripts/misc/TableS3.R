@@ -1,5 +1,5 @@
-setwd("C:/Users/rittere5/OneDrive - Michigan State University/Witchs_Broom_Project/final-snps-2023/") #Work working directory
-#setwd("C:/Users/elean/OneDrive - Michigan State University/Witchs_Broom_Project/final-snps-2023/")
+#setwd("C:/Users/rittere5/OneDrive - Michigan State University/Witchs_Broom_Project/final-snps-2023/") #Work working directory
+setwd("C:/Users/elean/OneDrive - Michigan State University/Witchs_Broom_Project/final-snps-2023/")
 
 library(biomaRt)
 library(dplyr)
@@ -193,7 +193,8 @@ data4$WT_Genotype <- paste(data4$dakapowt, data4$DWT_Sniffles_Genotype, sep = ";
 data5DSV <- data4[ , c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "V2.y", "tair_symbol")]
 colnames(data5DSV) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog")
 
-# Remove genotypes that match between callers
+# Remove a complex variant with genotypes that match between varieties
+# This location had two variants called at one position, and only the variant shared between callers will be kept
 
 test1<-cbind(data5DSV,do.call('rbind', strsplit(as.character(data5DSV$WB_Genotype), ';', fixed=TRUE)))
 colnames(test1) <- c("Variety", "Position", "Variant_Type", "Length", "WB_Genotype", "WT_Genotype", "Grape_Gene_Impacted", "Arabidopsis_Ortholog", "TAIR_Symbol_for_Arabidopsis_Ortholog", "WB.sniffles", "WB.pbsv")

@@ -836,8 +836,8 @@ library("cowplot")
 # grid2 <- plot_grid(p5, ncol = 1, nrow = 1, labels = c('e'))
 # plot_grid(grid1, grid2, ncol=1, nrow=2, rel_heights = c(2,1), align = "hv")
 
-grid1 <- plot_grid(p1, p2, p3, p4,  ncol = 4, nrow = 1,align = "hv", labels="auto")
-grid2 <- plot_grid(p5, p6, ncol = 2, nrow = 1, labels = c('e', 'f'))
+grid1 <- plot_grid(p1, p2, p3, p4,  ncol = 4, nrow = 1,align = "hv", labels="AUTO")
+grid2 <- plot_grid(p5, p6, ncol = 2, nrow = 1, labels = c('E', 'F'))
 plot_grid(grid1, grid2, ncol=1, nrow=2, align = "hv")
 
 ########################## 8 TEST MEAN SHAPE DIFFERENCES BETWEEN SAMPLES ##########################
@@ -1059,7 +1059,7 @@ p.merlot.mshape <- ggplot() +
         legend.position = "bottom") +
   guides(col = guide_legend(override.aes = list(alpha = 1), reverse = T))
 
-mshape.grid <- plot_grid(p.dakapo.mshape, p.merlot.mshape, ncol=2, nrow=1, align = "h", labels = "auto")
+mshape.grid <- plot_grid(p.dakapo.mshape, p.merlot.mshape, ncol=2, nrow=1, align = "h", labels = "AUTO")
 
 ########################## 9 PLOTTING PCA FOR SHAPE DATA ##########################
 #Set working directory
@@ -1152,7 +1152,7 @@ mpcB <- ggplot(mwtpc, aes(x=PC3, y=PC4)) +
         legend.key.size = unit(0.25, "cm"),
         legend.text = element_text(colour="black", size=10))
 
-plot_grid(mpcA, mpcB, ncol=2, nrow=1, rel_widths = c(1,1.4), align = "h", labels = "auto")
+plot_grid(mpcA, mpcB, ncol=2, nrow=1, rel_widths = c(1,1.4), align = "h", labels = "AUTO")
 
 # #A different way to plot data
 # light <- c("#EBEAEA")
@@ -1270,13 +1270,13 @@ dpcB <- ggplot(dwtpc, aes(x=PC3, y=PC4)) +
         legend.key.size = unit(0.25, "cm"),
         legend.text = element_text(colour="black", size=10))
 
-plot_grid(dpcA, dpcB, ncol=2, nrow=1, rel_widths = c(1,1.4), align = "h", labels = "auto")
+plot_grid(dpcA, dpcB, ncol=2, nrow=1, rel_widths = c(1,1.4), align = "h", labels = "AUTO")
 
 pc.grid <- plot_grid(dpcA, mpcA, dpcB, mpcB, ncol=2, nrow=2, 
-                     rel_heights = c(1,1.2), align="tblr", labels = c('c', 'd', 'e', 'f')) #Plotting with 2 rows
+                     rel_heights = c(1,1.2), align="tblr", labels = c('C', 'D', 'E', 'F')) #Plotting with 2 rows
 
 pc.grid <- plot_grid(dpcA, dpcB, mpcA, mpcB, ncol=4, nrow=1,
-                     align="tblr", labels = c('c','', 'd', ''), rel_widths = c(1,1, 1,1)) #Plotting with everything on 1 row
+                     align="tblr", labels = c('C','', 'D', ''), rel_widths = c(1,1, 1,1)) #Plotting with everything on 1 row
           
 plot_grid(mshape.grid, pc.grid, ncol=1, nrow=2, align = "tblr", rel_heights = c(1,1.25)) #Plotting with 2 row pc.grid
 
@@ -1299,10 +1299,10 @@ plot_grid(mshape.grid, pc.grid, ncol=1, nrow=2, align = "tblr", rel_heights = c(
 #   scale_color_gradientn(colors = c(light, dark), breaks = c(1,14), labels= c(1,14)) +
 #   scale_fill_gradientn(colors = c(light, dark), breaks = c(1,14), labels= c(1,14))
 # 
-# plot_grid(dpc1, dpc2, ncol=2, nrow=1, align = "h", labels = "auto")
+# plot_grid(dpc1, dpc2, ncol=2, nrow=1, align = "h", labels = "AUTO")
 
 ### Combine plots from running varieties seperately and plotting PCA values
-#plot_grid(mpcA, mpcB, dpcA, dpcB, ncol=2, nrow=2, rel_widths = c(1,1), axis= "tblr",align = "hv", labels = "auto")
+#plot_grid(mpcA, mpcB, dpcA, dpcB, ncol=2, nrow=2, rel_widths = c(1,1), axis= "tblr",align = "hv", labels = "AUTO")
 
 # ## All together
 # # Set colors
@@ -1351,7 +1351,7 @@ plot_grid(mshape.grid, pc.grid, ncol=1, nrow=2, align = "tblr", rel_heights = c(
 #         legend.text = element_text(colour="black", size = 12)) +
 #   guides(color = guide_legend(override.aes = list(size = 3)))
 # 
-# plot_grid(p7, p8, ncol=2, nrow=1, rel_widths = c(1,1.5), align = "h", labels = "auto")
+# plot_grid(p7, p8, ncol=2, nrow=1, rel_widths = c(1,1.5), align = "h", labels = "AUTO")
 ########################## 10 CODE IN PROGRESS ##########################
 # ARE THE WB LEAVES STUCK AS JUVENILES?
 ## RUN 1, 4A, AND 4B BEFORE RUNNING THE CODE BELOW:
@@ -1408,7 +1408,7 @@ p3 <- ggplot(df[(df$sample=='MWT'),], aes(x=node, y=all_area)) + geom_point() +
   ylab("MWT Leaf Area")+ geom_smooth(method="lm",formula= y ~ x + I(x^2))
 p4 <- ggplot(df[(df$sample=='MWB'),], aes(x=node, y=all_area)) + geom_point() +
   ylab("MWB Leaf Area")+ geom_smooth(method="lm",formula= y ~ x + I(x^2))
-plot_grid(p1, p2, p3, p4 , nrow=2, ncol=2)
+plot_grid(p1, p2, p3, p4 , nrow=2, ncol=2, labels = "AUTO")
 
 test<-lm(log(all_area)~sample+node:sample+I(node^2):sample-1,data=df)
 summary(test)

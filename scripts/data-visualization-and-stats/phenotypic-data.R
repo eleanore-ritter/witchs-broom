@@ -597,7 +597,7 @@ plotb <- ggplot(p.df2, aes(x=as.factor(node.bw), y=as.numeric(means.bw))) +
   guides(colour = guide_legend(override.aes = list(size=5)))
 
 # Make plot for supplement
-plot_grid(plota, plotb, ncol=2, labels="auto", rel_widths = c(2,3))
+plot_grid(plota, plotb, ncol=2, labels="AUTO", rel_widths = c(2,3))
 
 ########################## T-TEST FOR LEAF DATA ##########################
 # Need to split apart by nodes prior to running!
@@ -771,6 +771,6 @@ p3= ggplot(meristem.df, aes(fill=lateral.meristem, y=count, x=factor(varieties, 
 p3
 
 ########################## COMBINE PLOTS INTO FIGURE ##########################
-grid1 <- plot_grid(p1, p2, ncol = 2, nrow = 1, labels = "auto")
-grid2 <- plot_grid(p3, ncol = 1, nrow = 1, labels = c('c'))
+grid1 <- plot_grid(p1, p2, ncol = 2, nrow = 1, labels = "AUTO")
+grid2 <- plot_grid(p3, ncol = 1, nrow = 1, labels = c('C'))
 plot_grid(grid1, grid2, ncol=1, nrow=2)
